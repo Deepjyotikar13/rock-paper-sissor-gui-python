@@ -1,4 +1,7 @@
+#Deepjyoti karmakar
+#SORRY FOR THE SPELLING MISTAKES 
 from tkinter import *
+from tkinter import messagebox 
 from random import randint,shuffle
 from time import sleep
 import pygame
@@ -7,7 +10,7 @@ root=Tk()
 root.title("Rock Paper Sissor")
 pygame.mixer.init()
 pygame.init()
-root.geometry("1000x1899")
+root.geometry("899x1899")
 frame_button=Frame(root).pack(side="bottom")
 class buttonmaker:
 	def __init__(self,command2,command_name,witchc):
@@ -36,6 +39,19 @@ pho_rock_ob_2=creatPho("Rock.png")#second rock object
 labelR=Label(root,image=pho_rock_ob)#creating frist label to show
 pho_paper_ob=creatPho("Paperimage.png")
 pho_sissor_ob=creatPho("Sissor.png")
+show_heighst=0
+def show_heighst_score():
+	"""IT WILL SHOW THE HEIGHST SCORE"""
+	global show_heighst
+	with open("/storage/emulated/0/MyTKINTER PROJECTS/GUIROCKPAPERSISSOR/Score.txt","r")as re:
+		text_re=re.read()
+		if int(text_re)<your_score:
+			with open("/storage/emulated/0/MyTKINTER PROJECTS/GUIROCKPAPERSISSOR/Score.txt","w")as wr:
+				la=Label(root,text="hel").pack()
+				wr.write(str(your_score))
+				if show_heighst==0:
+					messagebox.showinfo("ROCKPAPERSISSOR", "highest score") 
+					show_heighst+=1
 #show function
 def youwon():
 	root.config(bg="green")
@@ -68,6 +84,7 @@ def delet_label():
 				add_score()
 				play_aplause()
 				your_score+=1#will count score
+				show_heighst_score()
 		elif user_enter=="P":
 			if file_name=="R":
 				youwon()
@@ -75,6 +92,7 @@ def delet_label():
 				play_aplause()
 				bottton_color_is="red"
 				your_score+=1
+				show_heighst_score()
 			elif file_name=="S":
 				youloose()
 				play_Boo()
@@ -84,11 +102,13 @@ def delet_label():
 				add_score()
 				play_aplause()
 				your_score+=1
+				show_heighst_score()
 			elif file_name=="R":
 				youloose()
 				play_Boo()
 		else:
 			bottton_color_is="blue"
+			
 	else:
 		if lis_ob[0]=="Paperimage.png":
 			file_name="P"
@@ -108,7 +128,7 @@ def delet_label():
 	
 def showlabel():
 	"""THIS WILL PLACE THE FRIST LABEL IN THE SCREEN"""
-	labelR.place(x=350,y=500)
+	labelR.place(x=308,y=500)
 	root.after(33,delet_label)
 
 def witch_co(val):
@@ -130,7 +150,7 @@ bu2.make_button(pho2,bottton_color_is)
 bu3=buttonmaker(showlabel,witch_co,"S")
 pho3=PhotoImage(file="Sissor.png")
 bu3.make_button(pho3,bottton_color_is)
-label_score=Label(root,text="Point ",font=("Comic Sans MS", 14, "bold")).place(x=300,y=30)
+label_score=Label(root,text="Point ",font=("Comic Sans MS", 14, "bold"),bg="black",fg="white").place(x=300,y=30)
 Scoree=Label(root,text=str(your_score),font=("Comic Sans MS", 14, "bold"))
 #THIS TWO FUNCTIONS ARE TO ADD SCORE
 def delet_sco():
